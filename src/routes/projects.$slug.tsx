@@ -13,16 +13,13 @@ export const Route = createFileRoute("/projects/$slug")({
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
-        meta: [
-          { title: "Project not found" },
-          { name: "robots", content: "noindex" },
-        ],
+        meta: [{ title: "Project not found" }, { name: "robots", content: "noindex" }],
       };
     }
     const t = `${loaderData.project.client} — ${loaderData.project.name}`;
     return {
       meta: [
-        { title: `${t} · M. Reyes` },
+        { title: `${t} · Arnau Sebastià` },
         { name: "description", content: loaderData.project.oneLiner },
         { property: "og:title", content: t },
         { property: "og:description", content: loaderData.project.oneLiner },
@@ -53,9 +50,98 @@ const sections = [
   { id: "reflection", label: "Reflection" },
 ];
 
+type CaseStudyCopy = {
+  context: string[];
+  contextNote: string;
+  problem: string[];
+  problemNote: string;
+  approach: string[];
+  decisions: string[];
+  decisionsNote: string;
+  outcome: string[];
+  reflection: string[];
+  lesson: string;
+  takeaway: string;
+};
+
+const placeholderCopy: CaseStudyCopy = {
+  context: [
+    "Case study coming soon. Content currently being prepared.",
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer facilisis, nibh at consequat luctus, arcu sem posuere lorem, vitae feugiat justo lectus non risus.",
+  ],
+  contextNote:
+    "Content currently being prepared. Placeholder copy is used to preserve the case study rhythm while final writing is completed.",
+  problem: [
+    "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.",
+    "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Donec ullamcorper nulla non metus auctor fringilla.",
+  ],
+  problemNote:
+    "Case study coming soon. Final challenge details will be added here once the approved copy is ready.",
+  approach: [
+    "Curabitur blandit tempus porttitor. Maecenas faucibus mollis interdum. Aenean lacinia bibendum nulla sed consectetur, etiam porta sem malesuada magna mollis euismod.",
+    "Vestibulum id ligula porta felis euismod semper. Cras mattis consectetur purus sit amet fermentum. Nulla vitae elit libero, a pharetra augue.",
+  ],
+  decisions: [
+    "Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.",
+    "Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec sed odio dui, consectetur adipiscing elit.",
+  ],
+  decisionsNote:
+    "Content currently being prepared. Validation notes are intentionally placeholder content for now.",
+  outcome: [
+    "Etiam porta sem malesuada magna mollis euismod. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.",
+  ],
+  reflection: [
+    "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.",
+  ],
+  lesson:
+    "Case study coming soon. Lessons learned will be documented when the final project copy is approved.",
+  takeaway: "Content currently being prepared. This takeaway is placeholder content.",
+};
+
+const fcBarcelonaMuseumCopy: CaseStudyCopy = {
+  context: [
+    "The FC Barcelona Museum project was a digital and physical experience that kept evolving while the team was designing and building it.",
+    "Because the museum experience was changing in real time, the design work had to stay flexible, clear and easy to adapt without losing consistency across the visitor journey.",
+  ],
+  contextNote:
+    "Contributed as a UX/UI Designer, working with a multidisciplinary team to support an experience that was still taking shape during production.",
+  problem: [
+    "The main challenge was designing for an installation context that could not be fully understood through static screens or isolated mockups.",
+    "Some decisions that seemed clear in a testing environment needed to be reconsidered once they were experienced in the real physical space.",
+  ],
+  problemNote:
+    "The biggest lesson from this project was not to assume that a testing environment accurately represents the final installation context.",
+  approach: [
+    "The process required constant collaboration across design, development, motion and content, making communication as important as the interface decisions themselves.",
+    "I focused on making thoughtful decisions that could support the evolving museum experience while keeping the work practical for the teams building it.",
+  ],
+  decisions: [
+    "We treated the experience as something that needed to be validated in context, not only as a set of screens to approve in isolation.",
+    "When something changed in the museum, the design had to respond without breaking the overall clarity and consistency of the visitor experience.",
+  ],
+  decisionsNote:
+    "This project reinforced the importance of validating design decisions in the actual context whenever possible.",
+  outcome: [
+    "The outcome section is still being prepared. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  ],
+  reflection: [
+    "This project changed the way I think about context. A design can make sense in a file and still need to change once it meets the real environment, the real team and the real constraints.",
+  ],
+  lesson:
+    "Validate decisions in the actual installation context whenever possible, especially when the experience depends on physical space, timing and collaboration across disciplines.",
+  takeaway:
+    "Good communication between teams prevents unnecessary work and helps fast-changing projects move forward with more confidence.",
+};
+
+function getCaseStudyCopy(slug: string): CaseStudyCopy {
+  if (slug === "fc-barcelona-museum") return fcBarcelonaMuseumCopy;
+  return placeholderCopy;
+}
+
 function ProjectDetail() {
   const { project } = Route.useLoaderData();
   const next = getNextProject(project.slug);
+  const copy = getCaseStudyCopy(project.slug);
   const [active, setActive] = useState<string>("context");
 
   useEffect(() => {
@@ -128,101 +214,44 @@ function ProjectDetail() {
 
           <article className="max-w-none">
             <StorySection id="context" title="Context">
-              <p>
-                {project.client} operates a large internal platform that had
-                grown, over eight years, into a dense web of tools maintained
-                by four different teams. New employees needed weeks before
-                they could use it confidently, and even veterans admitted they
-                only trusted a fraction of the screens they touched.
-              </p>
-              <p>
-                I joined for one quarter with a mandate that was intentionally
-                small: pick a single workflow and make it feel like a decision
-                surface, not a data entry form.
-              </p>
-              <Annotation kind="contribution">
-                Led design end to end: research, IA, prototyping, and the
-                design system additions that shipped with the redesign.
-              </Annotation>
+              {copy.context.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+              <Annotation kind="contribution">{copy.contextNote}</Annotation>
             </StorySection>
 
             <StorySection id="problem" title="The problem">
-              <p>
-                Interviews with sixteen operators surfaced a pattern I did not
-                expect: nobody read the page. They memorised where fields
-                lived and pattern-matched shapes. The screen was a keyboard,
-                not a document.
-              </p>
-              <p>
-                That meant every change we shipped broke muscle memory in ways
-                the tickets never captured. The redesign could not just look
-                better — it had to earn the right to be re-learned.
-              </p>
-              <Annotation kind="challenge">
-                The team assumed the problem was visual density. Research
-                showed it was closer to trust: operators did not believe the
-                numbers on screen.
-              </Annotation>
+              {copy.problem.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+              <Annotation kind="challenge">{copy.problemNote}</Annotation>
             </StorySection>
 
             <StorySection id="approach" title="Approach">
-              <p>
-                We built a small internal prototype that let one team try a
-                new reading order for two weeks, alongside the existing tool.
-                We measured nothing at first — just watched, and asked people
-                to narrate what they were looking at.
-              </p>
-              <p>
-                The prototype was ugly on purpose. Removing the visual polish
-                made it easier for operators to critique the structure rather
-                than the styling, which is a habit I have kept ever since.
-              </p>
+              {copy.approach.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
             </StorySection>
 
             <StorySection id="decisions" title="Key decisions">
-              <p>
-                We collapsed twelve tabs into three reading modes: monitor,
-                investigate, resolve. Each mode hid the controls that did not
-                belong to its intent, which reduced average clicks per task
-                by roughly a third once the pattern was learned.
-              </p>
-              <p>
-                Every number on the page now has a provenance popover — a
-                tiny thing that took two weeks to design and became the
-                feature operators mention first.
-              </p>
-              <Annotation kind="validation">
-                Eight of eight users in the second round of testing described
-                the new layout as "calmer" without prompt. We shipped the
-                week after.
-              </Annotation>
+              {copy.decisions.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+              <Annotation kind="validation">{copy.decisionsNote}</Annotation>
             </StorySection>
 
             <StorySection id="outcome" title="Outcome">
-              <p>
-                Time to first correct action dropped from 4m 20s to 1m 40s
-                for new operators. Support tickets for the workflow fell by
-                62% over the following quarter. More importantly, the team
-                started using the same reading-order language in unrelated
-                design reviews.
-              </p>
+              {copy.outcome.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
             </StorySection>
 
             <StorySection id="reflection" title="Reflection">
-              <p>
-                The lesson I keep returning to is that in mature products,
-                design is mostly negotiation with existing behaviour. The
-                best move is often to name the pattern out loud so the team
-                can decide, together, whether it is worth preserving.
-              </p>
-              <Annotation kind="lesson">
-                Ship the vocabulary before the interface. If the team cannot
-                describe the new model in one sentence, users never will.
-              </Annotation>
-              <Annotation kind="takeaway">
-                Ugly prototypes are a design tool. They protect structural
-                critique from being derailed by taste.
-              </Annotation>
+              {copy.reflection.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+              <Annotation kind="lesson">{copy.lesson}</Annotation>
+              <Annotation kind="takeaway">{copy.takeaway}</Annotation>
             </StorySection>
           </article>
         </div>
@@ -231,24 +260,15 @@ function ProjectDetail() {
       <section className="border-t border-hairline">
         <Container size="wide" className="py-20">
           <div className="eyebrow mb-6">Next project</div>
-          <Link
-            to="/projects/$slug"
-            params={{ slug: next.slug }}
-            className="group block"
-          >
+          <Link to="/projects/$slug" params={{ slug: next.slug }} className="group block">
             <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
               <div>
-                <div className="text-sm text-muted-foreground">
-                  {next.client}
-                </div>
+                <div className="text-sm text-muted-foreground">{next.client}</div>
                 <h3 className="mt-2 text-3xl tracking-tight text-foreground md:text-5xl">
-                  {next.name}{" "}
-                  <span className="text-muted-foreground">→</span>
+                  {next.name} <span className="text-muted-foreground">→</span>
                 </h3>
               </div>
-              <p className="max-w-md text-sm text-muted-foreground">
-                {next.oneLiner}
-              </p>
+              <p className="max-w-md text-sm text-muted-foreground">{next.oneLiner}</p>
             </div>
           </Link>
         </Container>
@@ -268,9 +288,7 @@ function StorySection({
 }) {
   return (
     <section id={id} className="mb-24 scroll-mt-24 first:mt-0">
-      <h2 className="mb-6 text-2xl tracking-tight text-foreground md:text-3xl">
-        {title}
-      </h2>
+      <h2 className="mb-6 text-2xl tracking-tight text-foreground md:text-3xl">{title}</h2>
       <div className="space-y-6 text-base leading-[1.75] text-foreground [&_p]:max-w-[68ch]">
         {children}
       </div>

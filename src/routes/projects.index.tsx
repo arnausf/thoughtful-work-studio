@@ -3,9 +3,9 @@ import { Section } from "@/components/site/Container";
 import { ProjectRow } from "@/components/site/ProjectRow";
 import { projects } from "@/content/projects";
 
-const title = "Work — M. Reyes";
+const title = "Projects — Arnau Sebastià";
 const description =
-  "A chronological index of selected product design work between 2023 and 2025.";
+  "Selected projects from Arnau Sebastià, including real FC Barcelona Museum content and placeholders for upcoming case studies.";
 
 export const Route = createFileRoute("/projects/")({
   head: () => ({
@@ -21,10 +21,9 @@ export const Route = createFileRoute("/projects/")({
 
 function ProjectsIndex() {
   return (
-    <Section eyebrow="Index · Selected work" size="wide" className="pt-32">
+    <Section eyebrow="Index · Selected projects" size="wide" className="pt-32">
       <h1 className="mb-16 max-w-3xl text-4xl leading-[1.1] tracking-tight text-foreground md:text-6xl">
-        Five projects, one recurring question — what does the reader need to
-        see right now?
+        Selected projects, decisions, challenges and lessons that shaped the way I design.
       </h1>
       <div>
         {projects.map((p, i) => (
