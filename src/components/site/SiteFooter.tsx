@@ -2,19 +2,19 @@ import { Link } from "@tanstack/react-router";
 
 export function SiteFooter() {
   return (
-    <footer className="mt-32 border-t border-hairline">
-      <div className="mx-auto grid max-w-[1280px] gap-10 px-6 py-16 md:grid-cols-4 md:px-10 lg:px-16">
+    <footer id="contact" className="mt-32 border-t border-hairline scroll-mt-24">
+      <div className="mx-auto grid max-w-[1280px] gap-12 px-6 py-16 md:grid-cols-4 md:px-10 lg:px-16">
         <div className="md:col-span-2">
-          <div className="eyebrow mb-3">Contact</div>
+          <div className="eyebrow mb-3">Let’s talk</div>
+          <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
+            If something resonated with you, I'd love to talk.
+          </p>
           <a
             href="mailto:arnausebastia98@gmail.com"
-            className="link-underline text-2xl tracking-tight text-foreground md:text-3xl"
+            className="link-underline mt-6 inline-block text-xl tracking-tight text-foreground sm:text-2xl md:text-4xl lg:text-5xl"
           >
             arnausebastia98@gmail.com
           </a>
-          <p className="mt-4 max-w-sm text-sm text-muted-foreground">
-            If something resonated with you, I'd love to talk.
-          </p>
         </div>
         <div>
           <div className="eyebrow mb-3">Elsewhere</div>
@@ -25,12 +25,7 @@ export function SiteFooter() {
               </a>
             </li>
             <li>
-              <a
-                aria-disabled="true"
-                className="link-underline cursor-not-allowed text-muted-foreground"
-              >
-                Resume — Coming Soon
-              </a>
+              <span className="text-muted-foreground">Resume — Coming Soon</span>
             </li>
           </ul>
         </div>
@@ -44,12 +39,12 @@ export function SiteFooter() {
             </li>
             <li>
               <Link to="/projects" className="link-underline">
-                Work
+                Projects
               </Link>
             </li>
             <li>
-              <Link to="/contact" className="link-underline">
-                Contact
+              <Link to="/manifesto" className="link-underline">
+                Manifesto
               </Link>
             </li>
           </ul>
@@ -57,7 +52,7 @@ export function SiteFooter() {
       </div>
       <div className="border-t border-hairline">
         <div className="mx-auto max-w-[1280px] px-6 py-6 text-sm text-muted-foreground md:px-10 lg:px-16">
-          <span>Barcelona · Remote across EU</span>
+          Barcelona · Remote across EU
         </div>
       </div>
     </footer>
