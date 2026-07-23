@@ -82,6 +82,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "author", content: "M. Reyes" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { title: "asdasd" },
+      { property: "og:title", content: "asdasd" },
+      { name: "twitter:title", content: "asdasd" },
+      { name: "description", content: "A personal portfolio showcasing design thinking, problem-solving, and collaborative work." },
+      { property: "og:description", content: "A personal portfolio showcasing design thinking, problem-solving, and collaborative work." },
+      { name: "twitter:description", content: "A personal portfolio showcasing design thinking, problem-solving, and collaborative work." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/eb9ef225-aa9f-42f6-9308-88d024702c91/id-preview-490f38e3--f2dbc39e-ed93-4242-bc1d-e5d7430249ca.lovable.app-1784806226735.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/eb9ef225-aa9f-42f6-9308-88d024702c91/id-preview-490f38e3--f2dbc39e-ed93-4242-bc1d-e5d7430249ca.lovable.app-1784806226735.png" },
     ],
     links: [
       {
