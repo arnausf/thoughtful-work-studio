@@ -41,12 +41,21 @@ function ProjectNotFound() {
   );
 }
 
-const sections = [
+const defaultSections = [
   { id: "context", label: "Context" },
   { id: "problem", label: "The problem" },
   { id: "approach", label: "Approach" },
   { id: "decisions", label: "Key decisions" },
   { id: "outcome", label: "Outcome" },
+  { id: "reflection", label: "Reflection" },
+];
+
+const museumSections = [
+  { id: "context", label: "What this project was about" },
+  { id: "problem", label: "What made it challenging" },
+  { id: "approach", label: "How we approached it" },
+  { id: "decisions", label: "User Validation" },
+  { id: "outcome", label: "Looking Back" },
   { id: "reflection", label: "Reflection" },
 ];
 
@@ -98,50 +107,53 @@ const placeholderCopy: CaseStudyCopy = {
   takeaway: "Content currently being prepared. This takeaway is placeholder content.",
 };
 
-const fcBarcelonaMuseumCopy: CaseStudyCopy = {
+const immersiveMuseumExperienceCopy: CaseStudyCopy = {
   context: [
-    "The FC Barcelona Museum project was a digital and physical experience that kept evolving while the team was designing and building it.",
-    "Because the museum experience was changing in real time, the design work had to stay flexible, clear and easy to adapt without losing consistency across the visitor journey.",
+    "This project involved designing digital experiences for a large-scale immersive museum featuring multiple interactive installations.",
+    "The experience combined different technologies, physical spaces and storytelling formats. Rather than designing a single product, the challenge was creating consistency across a collection of independent experiences that visitors would perceive as one museum.",
   ],
   contextNote:
-    "Contributed as a UX/UI Designer, working with a multidisciplinary team to support an experience that was still taking shape during production.",
+    "My contribution focused on UX/UI design, interface design, adapting experiences to multiple formats and maintaining consistency across installations. I worked alongside developers, motion designers, architects and content teams, iterating as the wider project changed.",
   problem: [
-    "The main challenge was designing for an installation context that could not be fully understood through static screens or isolated mockups.",
-    "Some decisions that seemed clear in a testing environment needed to be reconsidered once they were experienced in the real physical space.",
+    "The project paused for an extended period and returned with changed branding, updated visual assets, evolving content and installations that no longer matched earlier assumptions.",
+    "Those changes had practical consequences: screen sizes shifted, interactions needed to be adapted and decisions depended on architecture, content, motion, production and development moving at the same time.",
   ],
   problemNote:
-    "The biggest lesson from this project was not to assume that a testing environment accurately represents the final installation context.",
+    "The project changed repeatedly throughout development. Learning to adapt without sacrificing consistency became just as important as designing the interfaces themselves.",
   approach: [
-    "The process required constant collaboration across design, development, motion and content, making communication as important as the interface decisions themselves.",
-    "I focused on making thoughtful decisions that could support the evolving museum experience while keeping the work practical for the teams building it.",
+    "The process was iterative rather than linear. As installations changed, the design system, interface logic and content structure had to evolve with them.",
+    "Maintaining consistency required constant communication across disciplines. Design decisions were shaped through conversations with developers, motion designers, architects, production teams and content teams, not through isolated screen work.",
   ],
   decisions: [
-    "We treated the experience as something that needed to be validated in context, not only as a set of screens to approve in isolation.",
-    "When something changed in the museum, the design had to respond without breaking the overall clarity and consistency of the visitor experience.",
+    "Seeing people outside the project enjoy an experience we had been designing for months was one of the most rewarding validations of the process.",
+    "Beyond confirming design decisions, those sessions also revealed improvements that only become visible when observing real people interacting with the experience.",
   ],
   decisionsNote:
-    "This project reinforced the importance of validating design decisions in the actual context whenever possible.",
+    "The complexity wasn't designing individual screens. It was ensuring that dozens of independent experiences felt like parts of the same museum.",
   outcome: [
-    "The outcome section is still being prepared. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "Looking back, I would invest earlier in communication between teams, especially when architecture, content, motion, development and production are all evolving simultaneously.",
+    "I would also validate assumptions in the real installation whenever possible and avoid assuming that testing environments perfectly represent production.",
   ],
   reflection: [
-    "This project changed the way I think about context. A design can make sense in a file and still need to change once it meets the real environment, the real team and the real constraints.",
+    "This project taught me that adaptability is not separate from design quality. In a large-scale digital visitor experience, the interface is only one part of a wider system of people, spaces, content and production constraints.",
   ],
   lesson:
-    "Validate decisions in the actual installation context whenever possible, especially when the experience depends on physical space, timing and collaboration across disciplines.",
+    "Good communication becomes a design tool when many disciplines work together. When architecture, content, motion, development and production evolve simultaneously, communication prevents weeks of unnecessary redesign.",
   takeaway:
-    "Good communication between teams prevents unnecessary work and helps fast-changing projects move forward with more confidence.",
+    "The strongest design decisions were the ones that helped the team preserve coherence while the project continued to change.",
 };
 
 function getCaseStudyCopy(slug: string): CaseStudyCopy {
-  if (slug === "fc-barcelona-museum") return fcBarcelonaMuseumCopy;
+  if (slug === "fc-barcelona-museum") return immersiveMuseumExperienceCopy;
   return placeholderCopy;
 }
 
 function ProjectDetail() {
   const { project } = Route.useLoaderData();
   const next = getNextProject(project.slug);
+  const isMuseumCaseStudy = project.slug === "fc-barcelona-museum";
   const copy = getCaseStudyCopy(project.slug);
+  const sections = isMuseumCaseStudy ? museumSections : defaultSections;
   const [active, setActive] = useState<string>("context");
 
   useEffect(() => {
@@ -158,12 +170,19 @@ function ProjectDetail() {
     );
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();
-  }, []);
+  }, [sections]);
 
   return (
     <>
       <header className="border-b border-hairline">
         <Container size="wide" className="pb-16 pt-32">
+          {isMuseumCaseStudy && (
+            <p className="mb-8 max-w-2xl font-mono text-xs leading-relaxed text-muted-foreground">
+              Some project details have been intentionally generalized due to confidentiality
+              agreements. The focus of this case study is the design process, decision-making and
+              lessons learned rather than the client itself.
+            </p>
+          )}
           <div className="eyebrow mb-8">
             {project.client} · {project.year}
           </div>
@@ -213,40 +232,40 @@ function ProjectDetail() {
           </nav>
 
           <article className="max-w-none">
-            <StorySection id="context" title="Context">
+            <StorySection id="context" title={sections[0].label}>
               {copy.context.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
               <Annotation kind="contribution">{copy.contextNote}</Annotation>
             </StorySection>
 
-            <StorySection id="problem" title="The problem">
+            <StorySection id="problem" title={sections[1].label}>
               {copy.problem.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
               <Annotation kind="challenge">{copy.problemNote}</Annotation>
             </StorySection>
 
-            <StorySection id="approach" title="Approach">
+            <StorySection id="approach" title={sections[2].label}>
               {copy.approach.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </StorySection>
 
-            <StorySection id="decisions" title="Key decisions">
+            <StorySection id="decisions" title={sections[3].label}>
               {copy.decisions.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
               <Annotation kind="validation">{copy.decisionsNote}</Annotation>
             </StorySection>
 
-            <StorySection id="outcome" title="Outcome">
+            <StorySection id="outcome" title={sections[4].label}>
               {copy.outcome.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </StorySection>
 
-            <StorySection id="reflection" title="Reflection">
+            <StorySection id="reflection" title={sections[5].label}>
               {copy.reflection.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
