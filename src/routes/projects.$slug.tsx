@@ -279,7 +279,11 @@ function ProjectDetail() {
       <section className="border-t border-hairline">
         <Container size="wide" className="py-20">
           <div className="eyebrow mb-6">Next project</div>
-          <Link to="/projects/$slug" params={{ slug: next.slug }} className="group block">
+          <Link
+            to="/projects/$slug"
+            params={{ slug: next.slug }}
+            className="group relative block lg:pr-[22rem]"
+          >
             <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
               <div>
                 <div className="text-sm text-muted-foreground">{next.client}</div>
@@ -289,6 +293,11 @@ function ProjectDetail() {
               </div>
               <p className="max-w-md text-sm text-muted-foreground">{next.oneLiner}</p>
             </div>
+            <div
+              aria-hidden
+              className="pointer-events-none absolute right-0 top-1/2 hidden h-[200px] w-[320px] translate-y-[calc(-50%+10px)] border border-hairline opacity-0 transition-all duration-300 lg:block lg:group-hover:-translate-y-1/2 lg:group-hover:opacity-100 lg:group-focus-visible:-translate-y-1/2 lg:group-focus-visible:opacity-100"
+              style={{ background: next.preview }}
+            />
           </Link>
         </Container>
       </section>
