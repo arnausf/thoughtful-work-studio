@@ -1,44 +1,52 @@
+import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import type { Project } from "@/content/projects";
 
 export function ProjectRow({ project, index }: { project: Project; index: number }) {
-  const isReversed = index % 2 === 1;
-
+  const [hover, setHover] = useState(false);
   return (
     <Link
       to="/projects/$slug"
       params={{ slug: project.slug }}
-      className="group block py-12 md:py-16"
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      className="group relative block border-t border-hairline py-8 md:py-10"
     >
-      <div className="grid gap-8 md:grid-cols-2 md:items-center md:gap-16">
-        <div className={isReversed ? "md:order-2" : undefined}>
-          <div
-            aria-hidden
-            className="h-64 w-full bg-subtle md:h-[28rem]"
-            style={{ background: project.preview }}
-          />
+      <div className="grid grid-cols-[3rem_minmax(0,1fr)_auto] items-baseline gap-6 md:grid-cols-[4rem_10rem_minmax(0,1fr)_auto] md:gap-10">
+        <span className="font-mono text-xs text-muted-foreground">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+        <div className="hidden items-center gap-3 md:flex">
+          <span className="grid h-8 w-8 place-items-center border border-border font-mono text-[10px] tracking-widest text-foreground">
+            {project.clientMark}
+          </span>
+          <span className="text-sm text-muted-foreground">{project.client}</span>
         </div>
-
-        <div className={isReversed ? "md:order-1" : undefined}>
-          <div className="mb-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
-            <span>{project.client}</span>
-            <span aria-hidden>·</span>
-            <span>{project.role}</span>
-            <span aria-hidden>·</span>
-            <span>{project.year}</span>
+        <div className="min-w-0">
+          <div className="mb-1 text-xs text-muted-foreground md:hidden">
+            {project.client}
           </div>
-          <h3 className="max-w-xl text-3xl leading-tight tracking-tight text-foreground md:text-4xl">
+          <h3 className="text-xl tracking-tight text-foreground md:text-2xl">
             {project.name}
           </h3>
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+          <p className="mt-2 max-w-xl text-sm text-muted-foreground md:text-base">
             {project.oneLiner}
           </p>
-          <div className="mt-8 inline-flex items-center gap-2 text-sm text-foreground transition-transform duration-300 group-hover:translate-x-1">
-            <span>View project</span>
-            <span aria-hidden>→</span>
-          </div>
         </div>
+        <span className="font-mono text-xs text-muted-foreground">
+          {project.year}
+        </span>
       </div>
+
+      <div
+        aria-hidden
+        className="pointer-events-none absolute right-6 top-1/2 hidden h-32 w-52 border border-hairline transition-all duration-300 md:right-24 lg:block"
+        style={{
+          background: project.preview,
+          opacity: hover ? 1 : 0,
+          transform: `translateY(calc(-50% + ${hover ? "0px" : "6px"}))`,
+        }}
+      />
     </Link>
   );
 }
