@@ -15,10 +15,11 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "fc-barcelona-museum",
-    client: "FC Barcelona Museum",
-    clientMark: "FCB",
-    name: "FC Barcelona Museum",
-    oneLiner: "Designing a museum that kept changing while we were building it.",
+    client: "Immersive Museum Experience",
+    clientMark: "IME",
+    name: "Immersive Museum Experience",
+    oneLiner:
+      "Designing for a museum that kept evolving while we were building it. The challenge wasn't designing individual interfaces; it was maintaining one coherent visitor experience across dozens of installations.",
     year: "2025",
     role: "UX/UI Designer",
     duration: "Coming soon",
