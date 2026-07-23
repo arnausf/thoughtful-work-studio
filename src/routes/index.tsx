@@ -22,33 +22,33 @@ export const Route = createFileRoute("/")({
 function Home() {
   return (
     <>
-      <section className="flex min-h-[75vh] items-end border-b border-hairline">
-        <Container size="wide" className="w-full pb-16 pt-32 md:pb-24">
-          <div className="eyebrow mb-10">Product Designer • UX/UI Designer</div>
+      <section className="flex min-h-[64vh] items-end border-b border-hairline">
+        <Container size="wide" className="w-full pb-16 pt-28 md:pb-20 md:pt-32">
+          <div className="eyebrow mb-8">Product Designer · UX/UI Designer</div>
           <Reveal
             as="h1"
-            className="max-w-5xl text-4xl leading-[1.1] tracking-tight text-foreground md:text-6xl lg:text-7xl"
+            className="max-w-4xl text-3xl leading-[1.12] tracking-tight text-foreground md:text-5xl lg:text-6xl"
           >
             I don't want this portfolio to show you my best designs.
           </Reveal>
           <Reveal
             delay={120}
-            className="mt-10 flex flex-col gap-2 font-mono text-xs text-muted-foreground md:flex-row md:gap-10"
+            className="mt-10 max-w-2xl text-xl leading-relaxed text-muted-foreground md:text-2xl"
           >
-            <span>How I think, how I work, and what it feels like to work with me.</span>
-            <span>UX/UI & Product Designer helping complex digital projects move forward.</span>
-            <span>
-              Thoughtful decisions, cross-team collaboration and experiences that solve real
-              problems—not just beautiful interfaces.
-            </span>
+            <p>I want it to show you:</p>
+            <div className="mt-5 space-y-1 text-foreground">
+              <p>How I think.</p>
+              <p>How I work.</p>
+              <p>Who you'll be working with.</p>
+            </div>
           </Reveal>
         </Container>
       </section>
 
-      <Section eyebrow="01 — Manifesto" size="default">
+      <Section eyebrow="Manifesto" size="wide">
         <Reveal
           as="p"
-          className="text-2xl leading-[1.4] tracking-tight text-foreground md:text-3xl"
+          className="max-w-3xl text-2xl leading-[1.4] tracking-tight text-foreground md:text-3xl"
         >
           This portfolio isn't a showcase of polished screens. It's a collection of projects,
           decisions, challenges and lessons that shaped the way I design. Rather than focusing only
@@ -57,90 +57,49 @@ function Home() {
         </Reveal>
       </Section>
 
-      <Section eyebrow="02 — How to read this portfolio" size="wide">
-        <div className="grid gap-10 border-t border-hairline pt-10 md:grid-cols-3 md:gap-16">
-          {[
-            {
-              time: "Card 01",
-              title: "Projects aren't ordered chronologically.",
-              body: "Each one represents a different challenge that helped me grow as a designer.",
-            },
-            {
-              time: "Card 02",
-              title: "Screens matter.",
-              body: "But the decisions behind them matter even more.",
-            },
-            {
-              time: "Card 03",
-              title: "Every project includes lessons learned.",
-              body: "Because that's where the most valuable growth happens.",
-            },
-          ].map((r) => (
-            <Reveal key={r.time}>
-              <div className="font-mono text-xs text-accent">{r.time}</div>
-              <h3 className="mt-3 text-lg tracking-tight text-foreground">{r.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{r.body}</p>
-            </Reveal>
-          ))}
-        </div>
-      </Section>
-
-      <Section eyebrow="03 — Selected projects" size="wide">
-        <div>
+      <Section eyebrow="Selected projects" size="wide">
+        <div className="space-y-6">
           {projects.map((p, i) => (
             <ProjectRow key={p.slug} project={p} index={i} />
           ))}
-          <div className="border-t border-hairline pt-8">
-            <Link to="/projects" className="link-underline font-mono text-xs text-muted-foreground">
-              View Projects
+          <div className="pt-4">
+            <Link to="/projects" className="link-underline text-sm text-muted-foreground">
+              View projects →
             </Link>
           </div>
         </div>
       </Section>
 
-      <Section eyebrow="04 — How I work" size="default">
-        <ol className="space-y-12">
+      <Section eyebrow="How I work" size="wide">
+        <div className="grid max-w-5xl gap-x-16 gap-y-12 md:grid-cols-2">
           {[
             {
-              n: "01",
               t: "Solve before asking",
               b: "I try to solve independently first. When I need help, I ask early, share context and keep the next step clear.",
             },
             {
-              n: "02",
               t: "Attention to detail",
               b: "Small details rarely stand out alone, but together they shape how polished, trustworthy and useful a product feels.",
             },
             {
-              n: "03",
               t: "Design is collaborative",
               b: "The strongest projects happen when design, development, motion and content teams move as one shared team.",
             },
             {
-              n: "04",
               t: "Continuous learning",
               b: "Every project changes how I approach the next one. Learning is not separate from design; it is part of the process.",
             },
           ].map((s) => (
-            <Reveal
-              key={s.n}
-              as="li"
-              className="grid grid-cols-[4rem_1fr] gap-6 border-t border-hairline pt-6"
-            >
-              <span className="font-mono text-xs text-muted-foreground">{s.n}</span>
-              <div>
-                <h3 className="text-xl tracking-tight text-foreground">{s.t}</h3>
-                <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground">
-                  {s.b}
-                </p>
-              </div>
+            <Reveal key={s.t}>
+              <h3 className="text-xl tracking-tight text-foreground md:text-2xl">{s.t}</h3>
+              <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">{s.b}</p>
             </Reveal>
           ))}
-        </ol>
+        </div>
       </Section>
 
-      <Section id="thinking" eyebrow="05 — How I think" size="default">
-        <div className="space-y-16">
+      <Section id="thinking" eyebrow="How I think" size="wide">
+        <div className="max-w-3xl space-y-14">
           {[
             {
               t: "Biggest lesson",
@@ -175,8 +134,8 @@ function Home() {
         </div>
       </Section>
 
-      <Section eyebrow="06 — Experience" size="wide">
-        <ul>
+      <Section eyebrow="Experience" size="wide">
+        <ul className="max-w-5xl">
           {[
             ["2025 —", "Future Museum", "UX/UI Designer · Lorem ipsum dolor sit amet..."],
             ["2024 —", "NaviLens", "UX/UI Designer · Lorem ipsum dolor sit amet..."],
@@ -185,7 +144,7 @@ function Home() {
               key={org}
               className="grid grid-cols-[6rem_minmax(0,1fr)] gap-6 border-t border-hairline py-6 md:grid-cols-[10rem_14rem_minmax(0,1fr)] md:gap-10"
             >
-              <span className="font-mono text-xs text-muted-foreground">{years}</span>
+              <span className="text-sm text-muted-foreground">{years}</span>
               <span className="text-base tracking-tight text-foreground">{org}</span>
               <span className="col-span-2 text-sm text-muted-foreground md:col-span-1">{role}</span>
             </li>
@@ -193,17 +152,19 @@ function Home() {
         </ul>
       </Section>
 
-      <Section eyebrow="07 — Contact" size="default" className="pb-40">
+      <Section eyebrow="Contact" size="wide" className="pb-40">
         <Reveal>
-          <p className="text-lg leading-relaxed text-muted-foreground">
-            If something resonated with you, I'd love to talk.
-          </p>
-          <a
-            href="mailto:arnausebastia98@gmail.com"
-            className="link-underline mt-10 inline-block text-3xl tracking-tight text-foreground md:text-5xl"
-          >
-            arnausebastia98@gmail.com
-          </a>
+          <div className="max-w-3xl">
+            <p className="text-lg leading-relaxed text-muted-foreground">
+              If something resonated with you, I'd love to talk.
+            </p>
+            <a
+              href="mailto:arnausebastia98@gmail.com"
+              className="link-underline mt-10 inline-block text-3xl tracking-tight text-foreground md:text-5xl"
+            >
+              arnausebastia98@gmail.com
+            </a>
+          </div>
         </Reveal>
       </Section>
     </>
