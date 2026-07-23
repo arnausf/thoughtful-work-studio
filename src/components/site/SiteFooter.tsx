@@ -56,9 +56,8 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-hairline">
-        <div className="mx-auto flex max-w-[1280px] flex-col justify-between gap-2 px-6 py-6 font-mono text-xs text-muted-foreground md:flex-row md:px-10 lg:px-16">
+        <div className="mx-auto max-w-[1280px] px-6 py-6 text-sm text-muted-foreground md:px-10 lg:px-16">
           <span>Barcelona · Remote across EU</span>
-          <span>Set in Geist · v2026.1</span>
         </div>
       </div>
     </footer>

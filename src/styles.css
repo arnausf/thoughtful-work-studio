@@ -2,12 +2,10 @@
 @source "../src";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
 /*
  * Personal portfolio design system.
- * Neutral palette, subtle blue accent, straight corners.
- * Dark mode follows system preference (no toggle).
+ * Neutral light palette, subtle blue accent, straight corners.
+ * Light-only for this version; no automatic theme switching.
  */
 
 :root {
@@ -35,30 +33,6 @@
   --hairline: oklch(0.92 0.004 260);
   --input: oklch(0.9 0.005 260);
   --ring: oklch(0.55 0.13 250);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: oklch(0.14 0.008 260);
-    --foreground: oklch(0.94 0.005 250);
-    --card: oklch(0.16 0.008 260);
-    --card-foreground: oklch(0.94 0.005 250);
-    --popover: oklch(0.16 0.008 260);
-    --popover-foreground: oklch(0.94 0.005 250);
-    --primary: oklch(0.94 0.005 250);
-    --primary-foreground: oklch(0.14 0.008 260);
-    --secondary: oklch(0.2 0.008 260);
-    --secondary-foreground: oklch(0.94 0.005 250);
-    --muted: oklch(0.2 0.008 260);
-    --muted-foreground: oklch(0.62 0.01 260);
-    --subtle: oklch(0.18 0.008 260);
-    --accent: oklch(0.68 0.14 245);
-    --accent-foreground: oklch(0.14 0.008 260);
-    --border: oklch(0.26 0.008 260);
-    --hairline: oklch(0.23 0.008 260);
-    --input: oklch(0.26 0.008 260);
-    --ring: oklch(0.68 0.14 245);
-  }
 }
 
 @theme inline {
@@ -134,8 +108,9 @@
 }
 
 @utility eyebrow {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.75rem;
+  font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-muted-foreground);
