@@ -3,6 +3,7 @@ import { Section, Container } from "@/components/site/Container";
 import { Reveal } from "@/components/site/Reveal";
 import { ProjectRow } from "@/components/site/ProjectRow";
 import { projects } from "@/content/projects";
+import { education, experience } from "@/content/experience";
 
 const title = "Arnau Sebastià — Product Designer";
 const description =
@@ -64,21 +65,49 @@ function Home() {
       </Section>
 
       <Section eyebrow="Experience" size="wide">
-        <ul className="max-w-4xl">
-          {[
-            ["2025 —", "Future Museum", "UX/UI Designer"],
-            ["2024 —", "NaviLens", "UX/UI Designer"],
-          ].map(([years, organisation, role]) => (
-            <li
-              key={organisation}
-              className="grid grid-cols-[6rem_minmax(0,1fr)] gap-6 border-t border-hairline py-6 md:grid-cols-[10rem_14rem_minmax(0,1fr)] md:gap-10"
-            >
-              <span className="text-sm text-muted-foreground">{years}</span>
-              <span className="text-base tracking-tight text-foreground">{organisation}</span>
-              <span className="col-span-2 text-sm text-muted-foreground md:col-span-1">{role}</span>
-            </li>
-          ))}
-        </ul>
+        <div className="max-w-5xl">
+          <ul>
+            {experience.map((item, index) => (
+              <li
+                key={`${item.company}-${item.dates}`}
+                className={`grid gap-3 border-t border-hairline py-6 md:grid-cols-[11rem_minmax(0,1fr)_14rem] md:gap-10 ${
+                  index === 0 ? "md:py-8" : ""
+                }`}
+              >
+                <span className="text-sm text-muted-foreground">{item.dates}</span>
+                <div>
+                  <h2 className="text-base tracking-tight text-foreground md:text-lg">
+                    {item.company}
+                  </h2>
+                  <p className="mt-1 text-sm text-foreground md:hidden">{item.role}</p>
+                  {item.description ? (
+                    <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                      {item.description}
+                    </p>
+                  ) : null}
+                  {item.clients ? (
+                    <p className="mt-3 max-w-xl text-xs leading-relaxed text-muted-foreground">
+                      <span className="text-foreground">Selected clients:</span>{" "}
+                      {item.clients.join(", ")}.
+                    </p>
+                  ) : null}
+                </div>
+                <span className="hidden text-sm text-muted-foreground md:block">{item.role}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-14">
+            <div className="eyebrow mb-6">Education</div>
+            <div className="grid gap-3 border-t border-hairline py-6 md:grid-cols-[11rem_minmax(0,1fr)_14rem] md:gap-10">
+              <span className="text-sm text-muted-foreground">{education.dates}</span>
+              <h2 className="text-base tracking-tight text-foreground md:text-lg">
+                {education.institution}
+              </h2>
+              <span className="text-sm text-muted-foreground">{education.qualification}</span>
+            </div>
+          </div>
+        </div>
       </Section>
     </>
   );
